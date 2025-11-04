@@ -2,62 +2,62 @@
   "sun": {
     "filmName": "코닥 엑타 100",
     "reason": "채도가 높고 입자가 고와 쨍한 풍경에 최적입니다.",
-    "image": "/image/film/sun.png",
-    "example": "/image/example/sun.png"
+    "image": "./image/film/sun.png",
+    "example": "./image/example/sun.png"
   },
   "moon": {
     "filmName": "씨네스틸 800T",
     "reason": "야간, 인공조명(가로등) 아래에서 독특한 푸른 톤과 '할레이션' 효과를 냅니다.",
-    "image": "/image/film/moon.png",
-    "example": "/image/example/moon.png"
+    "image": "./image/film/moon.png",
+    "example": "./image/example/moon.png"
   },
   "sun-cloud": {
     "filmName": "코닥 포트라 400",
     "reason": "관용도가 높고 색감이 부드러워 빛이 오락가락하는 날이나 인물 스냅에 좋습니다.",
-    "image": "/image/film/sun-cloud.png",
-    "example": "/image/example/sun-cloud.png"
+    "image": "./image/film/sun-cloud.png",
+    "example": "./image/example/sun-cloud.png"
   },
   "moon-cloud": {
     "filmName": "일포드 델타 3200",
     "reason": "매우 어두운 밤에도 촬영 가능한 초고감도 흑백 필름입니다.",
-    "image": "/image/film/moon-cloud.png",
-    "example": "/image/example/moon-cloud.png"
+    "image": "./image/film/moon-cloud.png",
+    "example": "./image/example/moon-cloud.png"
   },
   "cloud": {
     "filmName": "후지필름 수퍼리아 X-TRA 400",
     "reason": "흐린 날의 차분하고 살짝 차가운 톤을 표현하기 좋은 표준 감도 필름입니다.",
-    "image": "/image/film/cloud.png",
-    "example": "/image/example/cloud.png"
+    "image": "./image/film/cloud.png",
+    "example": "./image/example/cloud.png"
   },
   "rain": {
     "filmName": "코닥 포트라 800",
     "reason": "비 오는 날의 부족한 광량을 보충해 주는 고감도 필름이며, 자연스러운 색감을 유지합니다.",
-    "image": "/image/film/rain.png",
-    "example": "/image/example/rain.png"
+    "image": "./image/film/rain.png",
+    "example": "./image/example/rain.png"
   },
   "storm": {
     "filmName": "코닥 트라이엑스 400",
     "reason": "폭풍우 치는 날의 거칠고 극적인 분위기를 표현하기 좋은 클래식 흑백 필름입니다.",
-    "image": "/image/film/storm.png",
-    "example": "/image/example/storm.png"
+    "image": "./image/film/storm.png",
+    "example": "./image/example/storm.png"
   },
   "snow": {
     "filmName": "코닥 포트라 160",
     "reason": "눈밭의 밝은 하이라이트(노출 과다)를 잘 제어하고 부드러운 톤을 표현합니다.",
-    "image": "/image/film/snow.png",
-    "example": "/image/example/snow.png"
+    "image": "./image/film/snow.png",
+    "example": "./image/example/snow.png"
   },
     "dust": {
         "filmName": "코닥 울트라맥스 400",
         "reason": "먼지나 안개로 인해 대비가 약해진 상황에서도 적당한 채도와 따뜻한 색감을 줍니다.",
-        "image": "/image/film/dust.png",
-        "example": "/image/example/dust.png"
+        "image": "./image/film/dust.png",
+        "example": "./image/example/dust.png"
   },
     "sunset":{
         "filmName": "코닥 골드 200",
         "reason": "따뜻한 색감으로 맑은 일몰 시간에 정말 잘나오는 필름입니다.",
-        "image": "/image/film/sunset.png",
-        "example": "/image/example/sunset.png"
+        "image": "./image/film/sunset.png",
+        "example": "./image/example/sunset.png"
   }
   
 }
