@@ -468,11 +468,13 @@ $.getJSON(url, function(data){
     let temp_min = data.main.temp_min
     let icon = getWeatherIcon(data.weather[0].icon)
     
+    $('.city').text(city)
     $('.icon').attr('src', './icon/' + icon + '.png')
     $('.weather-status').text(parseInt(Number(temp)) + '℃')
     $('.max').text('최고: ' + parseInt(Number(temp_max)) + '℃')
     $('.min').text('최저: ' + parseInt(Number(temp_min)) + '℃')
     
+    //시간대별 날씨 현재
     let hourlyNow= `
         <div class="hourly-item">
             <p class="hourly-time">현재</p>
@@ -486,12 +488,12 @@ $.getJSON(url, function(data){
     $.getJSON('film.json', function(film) {
         // 아이콘으로 데이터 가져오기 filmData에 정보 저장
         let filmData = film[icon];
+
         // filmData에 해당 날씨 정보가 있는지 확인
         if (filmData) {
             $('.film-name').text(filmData.filmName)
             $('.film-txt').text(filmData.reason)
             $('.film-img').attr('src', filmData.image)
-
         } else {
             $('.film-name').text('추천 필름 정보를 불러올 수 없습니다.')
             $('.film-txt').text('날씨 코드를 확인해주세요.')
@@ -505,17 +507,6 @@ $.getJSON(url, function(data){
         let korean = cityData[0].local_names.ko
         $('.city').text(korean)
     })
-    
-    // //주간날씨 css 테스트
-    // let weeklyTody= `
-    //     <div class="weekly-item">
-    //     <span class="weekly-day">오늘</span>
-    //     <img class="weekly-icon" src="./icon/${icon}.png">
-    //     <span class="weekly-temp-min">${parseInt(temp_min)}℃</span>
-    //     <span class="weekly-temp-max">${parseInt(temp_max)}℃</span>
-    //     </div>
-    // `;
-    // $('.weekly-container').append(weeklyTody)
 })
 
 
@@ -615,6 +606,7 @@ $('.button').click(function(){
     }
 })
 
+//아이콘 설정하기 함수
 function getWeatherIcon(weatherIcon){
     let icon;
     switch (weatherIcon){
