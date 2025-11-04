@@ -492,11 +492,12 @@ $.getJSON(url, function(data){
         }
     })  
     
-    //깃헙에 올리니까 작동안함...
+    //깃헙에 올리니까 작동안함...why? 지원을 안하는 것인가? 링크를 먼저 불러와서 kr을 못찾아서 못넣는 것인가 그럼 링크를 늦게 가져오면 되겠네
     //한글 도시명으로 변환
-    let urlC = `http://api.openweathermap.org/geo/1.0/direct?q=&Ansan-si&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`
+    $
+    let urlC = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`
 
-    $.getJSON(urlC, function(cityData){
+    $.getJSON(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`, function(cityData){
         let korean = cityData[0].local_names.ko
         $('.city').text(korean)
     })
@@ -587,7 +588,7 @@ if ($('.bottom').hasClass('open')){
     }
 })
 
-//버튼 누를때마다 사진 바꾸기
+//버튼 누를때마다 사진 바꾸기 0,1,2 순환 시켜서 바꾸기
 $('.button').click(function(){
     i = (i+1)%3
     if (i == 0){
