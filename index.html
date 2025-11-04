@@ -381,7 +381,7 @@
 </head>
 <!-- 바디 -->
 <body>
-<section class="weather-section">
+<div class="weather-section">
     <div class="weather-info">
         <h1 class="city"></h1>
         <img class="icon" src>
@@ -391,7 +391,7 @@
             <p class="max"></p>
         </div>
     </div>
-</section>
+</div>
 
 <!-- 시간별 날씨 -->
 <div class="hourly">
@@ -407,9 +407,7 @@
         <img class="air-color" src="./icon/aircondition.png">
         <img class="air-icon" src="./icon/air-icon.png">
     </div>
-
-
-</div>    
+</div>
 
 </div>
 <!-- 주간예보 -->
@@ -417,7 +415,6 @@
     <h3>주간예보</h3>
     <div class="weekly-container">
     </div>
-    
 </div>
 
 <!-- 하단 트리거 (바텀시트 열기 버튼 역할) -->
@@ -435,9 +432,7 @@
         </div>
         <p class="film-name"></p>
         <p class="film-txt"></p>
-
     </div>
-
 </div>
 
 
@@ -453,8 +448,6 @@ if ( 8 <= timeNow < 18 ){
 } else {
     $('body').css('background-image', 'url(./image/background-night.png)')
 }
-
-
 
 //현재날씨
 let url = 'https://api.openweathermap.org/data/2.5/weather?lat=37.340834&lon=126.733897&appid=cad522b3f4cc6f371dd04ea0b6286e33&units=metric'
