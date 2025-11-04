@@ -14,7 +14,7 @@
         }
         body {
             background-color: gray;
-            background-image: url(/image/background.png);
+            background-image: url(./image/background.png);
             background-size: 250%;
             padding: auto;
             padding-bottom: 100px;
@@ -343,8 +343,8 @@
     </div>
     <p class="air-quality-text">--</p>
     <div class="air-bar-container">
-        <img class="air-color" src="/icon/aircondition.png">
-        <img class="air-icon" src="/icon/air-icon.png">
+        <img class="air-color" src="./icon/aircondition.png">
+        <img class="air-icon" src="./icon/air-icon.png">
     </div>
 
 
@@ -362,16 +362,16 @@
 <!-- 하단 트리거 (바텀시트 열기 버튼 역할) -->
 <div class="bottom">
     <div class="handle" >
-        <img class="up-down" src="/icon/up.png"><br>
+        <img class="up-down" src="./icon/up.png"><br>
         <p class="bottom-title" >오늘의 추천 필름을 확인하세요!</p>
         
-        <img class="logo" src="/image/logo.png">
+        <img class="logo" src="./image/logo.png">
     </div>
     <div class="film">
         <div class="film-img-section">
-            <button class="button"><img class="film-button" src="/icon/left.png"></button>
+            <button class="button"><img class="film-button" src="./icon/left.png"></button>
             <img class="film-img" src>
-            <button class="button"><img class="film-button" src="/icon/right.png"></button>
+            <button class="button"><img class="film-button" src="./icon/right.png"></button>
         </div>
         <img class="example-img" src>
         <p class="film-name"></p>
@@ -390,9 +390,9 @@
 // 시간에 따른 배경변환
 let timeNow = moment().format("HH")
 if ( 8 <= timeNow < 18 ){
-    $('body').css('background-image', 'url(/image/background.png)')
+    $('body').css('background-image', 'url(./image/background.png)')
 } else {
-    $('body').css('background-image', 'url(/image/background-night.png)')
+    $('body').css('background-image', 'url(./image/background-night.png)')
 }
 
 
@@ -408,7 +408,7 @@ $.getJSON(url, function(data){
     let temp_min = data.main.temp_min
     let icon = getWeatherIcon(data.weather[0].icon)
     
-    $('.icon').attr('src', '/icon/' + icon + '.png')
+    $('.icon').attr('src', './icon/' + icon + '.png')
     $('.weather-status').text(parseInt(Number(temp)) + '℃')
     $('.max').text('최고: ' + parseInt(Number(temp_max)) + '℃')
     $('.min').text('최저: ' + parseInt(Number(temp_min)) + '℃')
@@ -416,7 +416,7 @@ $.getJSON(url, function(data){
     let hourlyNow= `
         <div class="hourly-item">
             <p class="hourly-time">현재</p>
-            <img class="hourly-icon" src="/icon/${icon}.png">
+            <img class="hourly-icon" src="./icon/${icon}.png">
             <p class="hourly-temp">${parseInt(Number(temp))}℃</p>
         </div>
         `
@@ -450,7 +450,7 @@ $.getJSON(url, function(data){
     // let weeklyTody= `
     //     <div class="weekly-item">
     //     <span class="weekly-day">오늘</span>
-    //     <img class="weekly-icon" src="/icon/${icon}.png">
+    //     <img class="weekly-icon" src="./icon/${icon}.png">
     //     <span class="weekly-temp-min">${parseInt(temp_min)}℃</span>
     //     <span class="weekly-temp-max">${parseInt(temp_max)}℃</span>
     //     </div>
@@ -476,7 +476,7 @@ $.getJSON(urlH, function(data){
         let hourlyWeahter = `
         <div class="hourly-item">
             <p class="hourly-time">${hour}시</p>
-            <img class="hourly-icon" src="/icon/${icon}.png">
+            <img class="hourly-icon" src="./icon/${icon}.png">
             <p class="hourly-temp">${temp}</p>
         </div>
         `
@@ -509,7 +509,7 @@ $.getJSON(urlW, function(data){
         let weeklyWeather= `
             <div class="weekly-item">
             <span class="weekly-day">${getDay(i)}</span> 
-            <img class="weekly-icon" src="/icon/${icon}.png">
+            <img class="weekly-icon" src="./icon/${icon}.png">
             <span class="weekly-temp-min">${parseInt(temp_min)}℃</span>
             <span class="weekly-temp-max">${parseInt(temp_max)}℃</span>
             </div>
@@ -527,7 +527,7 @@ if ($('.bottom').hasClass('open')){
         $('.bottom').toggleClass('open').animate({ bottom: '-440px' }, 500, function() {
             $('.bottom').css('bottom', '')
         })
-        $('.up-down').attr('src', '/icon/up.png')
+        $('.up-down').attr('src', './icon/up.png')
         $('.logo').hide(500)
         $('.film').hide()
         $('.bottom-title').show(500)
@@ -536,7 +536,7 @@ if ($('.bottom').hasClass('open')){
         $('.bottom').toggleClass('open').animate({ bottom: '0px' }, 500, function() {
             $('.bottom').css('bottom', '')
         });
-        $('.up-down').attr('src', '/icon/down.png')
+        $('.up-down').attr('src', './icon/down.png')
         $('.bottom-title').hide(500)
         $('.logo').show(500)
         $('.film').show(500)
@@ -547,11 +547,11 @@ if ($('.bottom').hasClass('open')){
 $('.button').click(function(){
     i = (i+1)%3
     if (i == 0){
-        $('.film-img').attr('src','/image/example/sun1.png')
+        $('.film-img').attr('src','./image/example/sun1.png')
     } else if ( i == 1){
-        $('.film-img').attr('src','/image/film/sun.png')
+        $('.film-img').attr('src','./image/film/sun.png')
     } else if ( i == 2){
-        $('.film-img').attr('src','/image/example/sun.png')
+        $('.film-img').attr('src','./image/example/sun.png')
     }
 })
 
