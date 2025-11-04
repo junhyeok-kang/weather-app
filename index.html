@@ -492,12 +492,12 @@ $.getJSON(url, function(data){
         }
     })  
     
-    //깃헙에 올리니까 작동안함...why? 지원을 안하는 것인가? 링크를 먼저 불러와서 kr을 못찾아서 못넣는 것인가 그럼 링크를 늦게 가져오면 되겠네
+    //깃헙에 올리니까 작동안함...why? 지원을 안하는 것인가? api 먼저 불러와서 kr을 못찾아서?
     //한글 도시명으로 변환
-    $
+    city = $('.city').text()
     let urlC = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`
 
-    $.getJSON(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`, function(cityData){
+    $.getJSON(urlC, function(cityData){
         let korean = cityData[0].local_names.ko
         $('.city').text(korean)
     })
