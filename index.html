@@ -495,7 +495,7 @@ $.getJSON(url, function(data){
     //깃헙에 올리니까 작동안함...why? 지원을 안하는 것인가? api 먼저 불러와서 kr을 못찾아서?
     //한글 도시명으로 변환
     city = $('.city').text()
-    let urlC = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`
+    let urlC = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`
 
     $.getJSON(urlC, function(cityData){
         let korean = cityData[0].local_names.ko
