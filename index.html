@@ -142,7 +142,10 @@
             gap: 16px;
             width: 400px;
             border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             flex-wrap: nowrap;     
             overflow-x: auto;   
         }
@@ -181,7 +184,10 @@
             padding: 16px;
             width: 400px;
             border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
         }
         .air-quality-title{
@@ -245,7 +251,10 @@
             padding: 16px;
             width: 400px;
             border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
         }
         .weekly h3{
@@ -310,7 +319,10 @@
             width: 100%;
             height: 520px;
             bottom: -440px;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: black;
             border-top-left-radius: 45px;
             border-top-right-radius: 45px;
@@ -318,6 +330,7 @@
             align-items: center;
             font-size: 24px;
             transition: bottom 0.1s;
+            color: #fff;
         }
         .bottom:not(.open):hover {
             bottom: -430px;
@@ -356,24 +369,27 @@
             padding-left: 32px;
             padding-right: 32px;
         }
+        .left-button{
+            background-image: url(./icon/left.png);
+            background-repeat: round;
+        }
+        .right-button{
+            background-image: url(./icon/right.png);
+            background-repeat: round;
+        }
         .button{
+            background-color: rgba(0, 0, 0, 0);
             border: 0;
-            outline: 0;
-            background-color: #fff;
-            cursor: pointer;
 
+            padding: 14px;
+            cursor: pointer;
         }
         .film-img-section{
             align-items: center;
             display: flex;
             justify-content: center;
+            gap: 8px;
 
-        }
-        .film-button{
-            justify-content: center;
-            align-items: center;
-            width: 32px;
-            opacity: 0.7;
         }
 
 
@@ -426,16 +442,14 @@
     </div>
     <div class="film">
         <div class="film-img-section">
-            <button class="button"><img class="film-button" src="./icon/left.png"></button>
+            <button class="button left-button"></button>
             <img class="film-img" src>
-            <button class="button"><img class="film-button" src="./icon/right.png"></button>
+            <button class="button right-button"></button>
         </div>
         <p class="film-name"></p>
         <p class="film-txt"></p>
     </div>
 </div>
-
-
 </body>
 
 
@@ -478,8 +492,21 @@ $.getJSON(url, function(data){
 
     // 필름 추천 json 데이터 가져오기
     $.getJSON('film.json', function(film) {
-        // 아이콘으로 데이터 가져오기 filmData에 정보 저장
-        let filmData = film[icon];
+        // 맑은날 일몰 전 두시간 동안에는 다른 필름 추천
+        let sunset = moment(data.sys.sunset * 1000)
+        let twoHoursBeforeSunset = sunset.clone().subtract(2, 'hours')
+        let now = moment()
+        let filmData
+
+        //일몰 조건
+        //맑고 일몰 보다 작고 두시간 전보다 클때 = 일몰 두시간 전 동안
+        if ( icon == 'sun' && twoHoursBeforeSunset<= now && now <= sunset){ 
+            console.log('일몰 두시간 전')
+            filmData = film['sunset']
+        }else{
+            console.log('아무것도 아님')
+            filmData = film[icon];
+        }
 
         // filmData에 해당 날씨 정보가 있는지 확인
         if (filmData) {
@@ -490,20 +517,31 @@ $.getJSON(url, function(data){
             $('.film-name').text('추천 필름 정보를 불러올 수 없습니다.')
             $('.film-txt').text('날씨 코드를 확인해주세요.')
         }
-    })  
     
-    //깃헙에 올리니까 작동안함...why? 지원을 안하는 것인가? api 먼저 불러와서 kr을 못찾아서?
+        //버튼 누를때마다 사진 바꾸기 0,1,2 순환 시켜서 바꾸기
+        let i = 0
+        $('.button').click(function(){
+            i = (i+1)%3
+            if (i == 0){
+                $('.film-img').attr('src','./image/example/sun1.png') // ex2 더미
+            } else if ( i == 1){
+                $('.film-img').attr('src',filmData.image) //필름 이미지
+            } else if ( i == 2){
+                $('.film-img').attr('src','./image/example/sun.png') //ex1 더미
+            }
+        })
+
+
+    })
+    
     //한글 도시명으로 변환
-    city = $('.city').text()
-    let urlC = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33`
+    let urlC = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33` //https여야 됨
 
     $.getJSON(urlC, function(cityData){
         let korean = cityData[0].local_names.ko
         $('.city').text(korean)
     })
 })
-
-
 
 //시간대별 날씨
 let urlH = 'https://api.openweathermap.org/data/2.5/forecast/hourly?lat=37.340834&lon=126.733897&appid=cad522b3f4cc6f371dd04ea0b6286e33&units=metric&cnt=24'
@@ -588,18 +626,6 @@ if ($('.bottom').hasClass('open')){
     }
 })
 
-//버튼 누를때마다 사진 바꾸기 0,1,2 순환 시켜서 바꾸기
-$('.button').click(function(){
-    i = (i+1)%3
-    if (i == 0){
-        $('.film-img').attr('src','./image/example/sun1.png')
-    } else if ( i == 1){
-        $('.film-img').attr('src','./image/film/sun.png')
-    } else if ( i == 2){
-        $('.film-img').attr('src','./image/example/sun.png')
-    }
-})
-
 //아이콘 설정하기 함수
 function getWeatherIcon(weatherIcon){
     let icon;
@@ -673,7 +699,6 @@ function getAirQualityStatus(pm10) {
 
     return [status,pm10,percent];
 }
-
 
 //예보 오늘 내일 모레 며칠 후 인지 가져오는 함수
 function getDay(i){
