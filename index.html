@@ -342,6 +342,9 @@
         .open{
             bottom: 0;
         }
+        /* .open:hover{
+            bottom : -10px
+        } */
         .film{
             display: none;
             padding: 16px;
@@ -455,13 +458,14 @@
 
 <!-- 스크립트 -->
 <script>
+// 일출 일몰로 변경
 // 시간에 따른 배경변환
-let timeNow = moment().format("HH")
-if ( 8 <= timeNow < 18 ){
-    $('body').css('background-image', 'url(./image/background.png)')
-} else {
-    $('body').css('background-image', 'url(./image/background-night.png)')
-}
+// let timeNow = moment().format("HH")
+// if ( 8 <= timeNow < 18 ){
+//     $('body').css('background-image', 'url(./image/background.png)')
+// } else {
+//     $('body').css('background-image', 'url(./image/background-night.png)')
+// }
 
 //현재날씨
 let url = 'https://api.openweathermap.org/data/2.5/weather?lat=37.340834&lon=126.733897&appid=cad522b3f4cc6f371dd04ea0b6286e33&units=metric'
@@ -473,7 +477,7 @@ $.getJSON(url, function(data){
     let temp_max = data.main.temp_max
     let temp_min = data.main.temp_min
     let icon = getWeatherIcon(data.weather[0].icon)
-    
+
     $('.city').text(city)
     $('.icon').attr('src', './icon/' + icon + '.png')
     $('.weather-status').text(parseInt(Number(temp)) + '℃')
@@ -501,11 +505,9 @@ $.getJSON(url, function(data){
         //일몰 조건
         //맑고 일몰 보다 작고 두시간 전보다 클때 = 일몰 두시간 전 동안
         if ( icon == 'sun' && twoHoursBeforeSunset<= now && now <= sunset){ 
-            console.log('일몰 두시간 전')
             filmData = film['sunset']
-        }else{
-            console.log('아무것도 아님')
-            filmData = film[icon];
+        } else {
+            filmData = film[icon]
         }
 
         // filmData에 해당 날씨 정보가 있는지 확인
@@ -519,7 +521,7 @@ $.getJSON(url, function(data){
         }
     
         //버튼 누를때마다 사진 바꾸기 0,1,2 순환 시켜서 바꾸기
-        let i = 0
+        let i = 1
         $('.button').click(function(){
             i = (i+1)%3
             if (i == 0){
@@ -530,10 +532,8 @@ $.getJSON(url, function(data){
                 $('.film-img').attr('src','./image/example/sun.png') //ex1 더미
             }
         })
-
-
     })
-    
+
     //한글 도시명으로 변환
     let urlC = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=cad522b3f4cc6f371dd04ea0b6286e33` //https여야 됨
 
@@ -541,6 +541,16 @@ $.getJSON(url, function(data){
         let korean = cityData[0].local_names.ko
         $('.city').text(korean)
     })
+
+    //낮 밤 배경 변환 일출 일몰을 조건
+    let sunset = moment(data.sys.sunset * 1000)
+    let sunrise = moment(data.sys.sunrise * 1000)
+    let timeNow = moment()
+    if ( sunrise < timeNow < sunset ){
+        $('body').css('background-image', 'url(./image/background.png)')
+    } else {
+        $('body').css('background-image', 'url(./image/background-night.png)')
+    }
 })
 
 //시간대별 날씨
@@ -555,6 +565,7 @@ $.getJSON(urlH, function(data){
         let hour = moment(item.dt * 1000).format('HH')
         let temp = parseInt(Number(item.main.temp)) + '℃'
         let icon = getWeatherIcon(item.weather[0].icon)
+        
         
         let hourlyWeahter = `
         <div class="hourly-item">
